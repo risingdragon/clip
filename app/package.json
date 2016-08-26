@@ -1,0 +1,12 @@
+{
+  "name": "clip",
+  "version": "0.0.1",
+  "description": "clipboad memo",
+  "main": "dist/main/index.js",
+  "author": "Y.Hasegawa",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.0"
+  }
+}
