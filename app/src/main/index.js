@@ -51,6 +51,12 @@ app.on('ready', () => {
 			}
 		},
 		{
+			label: "clear",
+			click: () => {
+				fs.unlink(dataFile)
+			}
+		},
+		{
 			label: "exit",
 			click: () => {
 				disableClose = false
@@ -78,6 +84,28 @@ app.on('ready', () => {
 				histories = JSON.parse(data)
 			}
 			e.sender.send('show-histories', histories)
+		})
+	})
+
+	ipcMain.on('delete', (e, order) => {
+		fs.readFile(dataFile, { encoding: 'utf8' }, (err, data) => {
+			let histories = []
+			if (err) {
+				console.log(err)
+				return
+			}
+			histories = JSON.parse(data)
+
+			let newHistories = []
+			let cnt = 0
+			for (let history of histories) {
+				if (++cnt == order) {
+					continue
+				}
+				newHistories.push(history)
+			}
+
+			saveClip(newHistories)
 		})
 	})
 
