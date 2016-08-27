@@ -17,7 +17,7 @@ app.on('ready', () => {
 	win = new BrowserWindow({
 		width: 400,
 		height: 600,
-		transparent: true,
+		frame: false,
 		resizable: false,
 		show: false,
 		skipTaskbar: true
@@ -59,8 +59,6 @@ app.on('ready', () => {
 		}
 	])
 
-	Menu.setApplicationMenu(null)
-
 	appIcon.setContextMenu(contextMenu)
 	appIcon.setToolTip(app.getName())
 
@@ -93,6 +91,7 @@ app.on('ready', () => {
 
 	let watchClip = () => {
 		let text = clipboard.readText()
+		if (text.length == 0) { return }
 		let current = crypto.createHash('md5').update(text).digest('hex')
 		if (current != last) {
 			last = current
@@ -104,7 +103,7 @@ app.on('ready', () => {
 					}
 					let histories = JSON.parse(data)
 					histories.unshift(text)
-					saveClip(histories.slice(0, 10))
+					saveClip(histories.slice(0, 20))
 				})
 			} catch (err) {
 				saveClip([text])
@@ -113,22 +112,22 @@ app.on('ready', () => {
 	}
 
 	fs.readFile(dataFile, { encoding: 'utf8' }, (err, data) => {
-		if (err) {
-			return
+		if (!err) {
+			let histories = JSON.parse(data)
+			if (histories.length > 0) {
+				last = crypto.createHash('md5').update(histories[0]).digest('hex')
+			}
 		}
-		let histories = JSON.parse(data)
-		if (histories.length > 0) {
-			last = crypto.createHash('md5').update(histories[0]).digest('hex')
-		}
-		setInterval(watchClip, 1000)
+		setInterval(watchClip, 500)
 	})
 
-	const shortcutResult = globalShortcut.register('Control+Shift+H', () => {
+	globalShortcut.register('Ctrl+Alt+L', () => {
 		win.show()
 		win.focus()
 	})
 
-	if (!shortcutResult) {
-		shortcutResult.log('registration failed')
-	}
+	globalShortcut.register('Ctrl+Alt+X', () => {
+		disableClose = false
+		win.close()
+	})
 })

@@ -1,7 +1,7 @@
 {
-  "name": "clip",
-  "version": "0.0.1",
-  "description": "clipboad memo",
+  "name": "ClipboardTool",
+  "version": "0.1.0",
+  "description": "ClipboardTool for text",
   "main": "dist/main/index.js",
   "author": "Y.Hasegawa",
   "license": "ISC",

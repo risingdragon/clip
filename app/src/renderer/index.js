@@ -9,7 +9,7 @@
 	ipcRenderer.on('show-histories', (e, histories) => {
 		$('#histories').empty()
 		for (let history of histories) {
-			let atag = $('<a></a>').addClass('list-group-item').text(history)
+			let atag = $('<a></a>').addClass('list-group-item').text(history.substr(0, 100))
 			$('#histories').append(atag)
 		}
 	})
