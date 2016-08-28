@@ -4,9 +4,7 @@
 
 * clipboard application on background by electron
 
-## install
-
-1. build
+## build
 ```
 npm install
 cd app
@@ -14,7 +12,8 @@ npm install
 cd ../
 npm run build
 ```
-1. start
+
+## start
 ```
 npm start
 ```
