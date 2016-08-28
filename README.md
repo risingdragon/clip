@@ -1,5 +1,20 @@
 # clip
 
+## description
+
 * clipboard application on background by electron
 
-![A screenshot of your package](https://f.cloud.github.com/assets/69169/2290250/c35d867a-a017-11e3-86be-cd7c5bf3ff9b.gif)
+## install
+
+1. build
+```
+npm install
+cd app
+npm install
+cd ../
+npm run build
+```
+1. start
+```
+npm start
+```

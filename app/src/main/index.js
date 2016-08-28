@@ -105,15 +105,19 @@ app.on('ready', () => {
 				newHistories.push(history)
 			}
 
-			saveClip(newHistories)
+			saveClip(newHistories, () => {
+				e.sender.send('show-histories', newHistories)
+			})
 		})
 	})
 
-	let saveClip = (histories) => {
+	let saveClip = (histories, callback) => {
 		fs.writeFile(dataFile, JSON.stringify(histories), (err) => {
 			if (err) {
 				console.log(err)
+				return
 			}
+			if (callback != undefined) { callback() }
 		})
 	}
 

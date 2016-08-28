@@ -1,6 +1,7 @@
 {
   "scripts": {
     "start": "electron app",
+    "build": "babel app/src -d app/dist --presets es2015",
     "watch": "babel -w app/src -d app/dist --presets es2015",
     "pack:win": "build --win --x64"
   },
