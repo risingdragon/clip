@@ -1,5 +1,5 @@
 const { app, BrowserWindow, Menu, Tray, ipcMain, clipboard, globalShortcut } = require('electron')
-const crypto = require('crypto');
+const crypto = require('crypto')
 const fs = require('fs')
 
 let win = null
@@ -153,7 +153,7 @@ app.on('ready', () => {
 		setInterval(watchClip, 500)
 	})
 
-	globalShortcut.register('Ctrl+Alt+L', () => {
+	globalShortcut.register('Ctrl+F12', () => {
 		win.show()
 		win.focus()
 	})
@@ -162,4 +162,8 @@ app.on('ready', () => {
 		disableClose = false
 		win.close()
 	})
+})
+
+app.on('will-quit', () => {
+	globalShortcut.unregisterAll()
 })
